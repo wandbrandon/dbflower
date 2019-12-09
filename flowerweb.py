@@ -21,11 +21,17 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-
 @app.route("/")
 @app.route("/home")
 def index():
     cur = get_db().cursor()
-    d = cur.execute("SELECT * FROM sightings")
-    #h = cur.execute("PRAGMA table_info(sightings);")
+    d = cur.execute("SELECT * FROM flowers") 
     return render_template("index.html", data=d)
+
+@app.route("/sightings/<string:comname>")
+def sightings(comname):
+    cur = get_db().cursor()
+    select = "SELECT * FROM sightings WHERE sightings.name = '{}' ORDER BY sighted DESC LIMIT 10;".format(comname)
+    d = cur.execute(select)
+    return render_template("sightings.html", data=d)
+

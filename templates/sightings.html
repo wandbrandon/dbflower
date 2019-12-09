@@ -30,33 +30,28 @@
                         
 						<div class="row header">
 							<div class="cell">
-                                Genus
+                                Name
                             </div>
 							<div class="cell">
-								Species
+								Person
 							</div>
 							<div class="cell">
-								Comname
+								Location
 							</div>
                         	<div class="cell">
-								Sightings Table
+								Sighted
 							</div>
 						</div>
                         
                         <!-- loop through data table. -->
                         {% for row in data %}
 						<div class="row">
-                            {% set temp = "Draperia" %}
                             {% for r in row %}
 							<div class="cell">
                                 {{ r }}
-                                {% set temp = r %}
 							</div>
                             {% endfor %}
-                            <div class="cell">
-                                <a type="button" class="btn btn-link" href="{{ url_for('sightings', comname=row[2]) }}">Sightings</a>
-							</div>
-						</div>
+                            </div>
                         {% endfor %}
 					</div>
 			</div>
