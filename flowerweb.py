@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, g, render_template
+from flask import Flask, g, render_template, request
 
 #initialize database
 DATABASE = 'flowers2019.db'
@@ -34,4 +34,12 @@ def sightings(comname):
     select = "SELECT * FROM sightings WHERE sightings.name = '{}' ORDER BY sighted DESC LIMIT 10;".format(comname)
     d = cur.execute(select)
     return render_template("sightings.html", data=d)
+
+# @app.route("/update/<string:ge>", methods=['POST'])
+# def update(ge):
+#    return render_template("update.html", genus=ge)
+
+@app.route("/update/<string:ge>")
+def update(ge):
+   return render_template("update.html", genus=ge)
 

@@ -39,7 +39,10 @@
 								Comname
 							</div>
                         	<div class="cell">
-								Sightings Table
+								Sightings
+							</div>
+                            <div class="cell">
+								Updates
 							</div>
 						</div>
                         
@@ -54,7 +57,10 @@
 							</div>
                             {% endfor %}
                             <div class="cell">
-                                <a type="button" class="btn btn-link" href="{{ url_for('sightings', comname=row[2]) }}">Sightings</a>
+                                <a type="button" class="btn btn-link" href="{{ url_for('sightings', comname=row[2]) }}">S</a>
+							</div>
+                            <div class="cell">
+                                <a type="button" class="btn btn-link" href="{{ url_for('update', ge=row[0])}}">U</a>
 							</div>
 						</div>
                         {% endfor %}
