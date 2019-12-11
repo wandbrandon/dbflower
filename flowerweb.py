@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, g, render_template, request
+from flask import Flask, g, render_template, request, redirect
 
 #initialize database
 DATABASE = 'flowers2019.db'
@@ -35,11 +35,31 @@ def sightings(comname):
     d = cur.execute(select)
     return render_template("sightings.html", data=d)
 
-# @app.route("/update/<string:ge>", methods=['POST'])
-# def update(ge):
-#    return render_template("update.html", genus=ge)
+@app.route("/update/<string:comname>")
+def update(comname):
+   return render_template("update.html", c=comname)
 
-@app.route("/update/<string:ge>")
-def update(ge):
-   return render_template("update.html", genus=ge)
+@app.route("/update/<string:comname>", methods=['POST'])
+def form_update(comname):
+    g = request.form['genus']
+    s = request.form['species']
+    c = request.form['comname']
+    cur = get_db().cursor()
+    u = cur.execute("UPDATE flowers SET genus='{}', species='{}', comname='{}' WHERE comname='{}'".format(g,s,c,comname))
+    get_db().commit()
+    return redirect('/home')
 
+@app.route("/insert/<string:comname>")
+def insert(comname):
+   return render_template("insert.html", c=comname)
+
+@app.route("/insert/<string:comname>", methods=['POST'])
+def form_insert(comname):
+    p = request.form['person']
+    l = request.form['location']
+    s = request.form['sighted']
+    cur = get_db().cursor()
+    temp = "INSERT INTO sightings VALUES ('{}', '{}', '{}', '{}')".format(comname, p, l, s)
+    u = cur.execute(temp)
+    get_db().commit()
+    return redirect('/home')
