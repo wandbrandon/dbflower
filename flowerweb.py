@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, g, render_template, request, redirect
 
+
 #initialize database
 DATABASE = 'flowers2019.db'
 
