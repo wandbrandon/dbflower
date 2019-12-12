@@ -1,7 +1,6 @@
 import sqlite3
 from flask import Flask, g, render_template, request, redirect
 
-
 #initialize database
 DATABASE = 'flowers2019.db'
 
@@ -27,7 +26,7 @@ def close_connection(exception):
 def index():
     cur = get_db().cursor()
     d = cur.execute("SELECT * FROM flowers") 
-    return render_template("index.html", data=d)
+    return render_template("home.html", data=d)
 
 @app.route("/sightings/<string:comname>")
 def sightings(comname):
