@@ -14,7 +14,7 @@ def get_db():
         db = g._database = sqlite3.connect(DATABASE)
     return db
 
-#Closing the database (from documentation)
+#Closing the database
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -25,8 +25,10 @@ def close_connection(exception):
 @app.route("/home")
 def index():
     cur = get_db().cursor()
-    d = cur.execute("SELECT * FROM flowers") 
-    return render_template("home.html", data=d)
+    f = cur.execute("SELECT * FROM flowers;")
+    curl = get_db().cursor()
+    l = curl.execute("SELECT * FROM data_log;")
+    return render_template("home.html", flowers=f, log=l)
 
 @app.route("/sightings/<string:comname>")
 def sightings(comname):

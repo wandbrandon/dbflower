@@ -21,8 +21,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home/css/util.css') }}">
 <!--===============================================================================================-->
 </head>
-<body>
-	
+
+<body>	
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
@@ -39,7 +39,7 @@
 							</tr>
 						</thead>
 						<tbody>
-                                {% for row in data %}
+                                {% for row in flowers %}
 								<tr>
                                     <td class="column1">{{ row[0] }}</td>
                                     <td class="column2">{{ row[1] }}</td>
@@ -59,11 +59,37 @@
 					</table>
 				</div>
 			</div>
-		</div>
-	</div>
-
-
-	
+            	<div class="wrap-table100">
+				    <div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Timestamp</th>
+                                <th class="column2">Action</th>
+								<th class="column3">On</th>
+                                <th class="column4">Old Name</th>
+								<th class="column5">New Name</th>
+								<th class="column6">User</th>
+						    </tr>
+						</thead>
+						<tbody>
+                                {% for row in log %}
+								<tr>
+                                    <td class="column1">{{ row[0] }}</td>
+                                    <td class="column2">{{ row[1] }}</td>
+                                    <td class="column3">{{ row[2] }}</td>
+									<td class="column4">{{ row[3] }}</td>
+                                    <td class="column5">{{ row[4] }}</td>
+                                    <td class="column6">{{ row[5] }}</td>
+								</tr>
+                                {% endfor %}
+						</tbody>
+					</table>
+				    </div>
+			    </div>
+		    </div>
+        </div>
+    </div>
 
 <!--===============================================================================================-->	
     <script src="{{ url_for('static', filename='home/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
